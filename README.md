@@ -1,2 +1,2 @@
-# blockchain-todolist-web
-A to-do list web application powered by the Ethereum blockchain
+# ethereum-todolist-web
+A distributed web application for a simple to-do list powered by Ethereum Smart Contracts.
