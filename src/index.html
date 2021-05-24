@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoList</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="container">
+            <a href="#" class="logo"> Todo<span>List</span></a>
+            <img id="mobile-cta" class="mobile-menu" src="assets/menu.svg" alt="Open Navigation Menu">
+            <nav>
+                <img id="mobile-exit" class="mobile-menu-exit" src="assets/exit.svg" alt="Exit Navigation Menu">
+                <ul class="primary-nav">
+                    <li class="current"><a href="#">Home</a></li>
+                    <li><a href="http://www.github.com/manishmeganathan">Github</a></li>
+                    <li ><a href="#contact-section">Contact</a></li>
+                </ul>
+                <ul>
+                    <li class="account"><a href="#"><span id="account">No Account Connected</span></a></li>
+                </ul>
+
+            </nav>
+        </div>
+    </div>
+
+    <section class="task-section">
+        <div class="main">
+            <div id="loader" class="text-center">
+                <p class="text-center">Loading...</p>
+            </div>
+        </div>
+
+        <div class="task-content">
+            <form onSubmit="App.createTask(); return false;">
+                <input id="newtask" type="text" class="form-control" placeholder="Add task..." required>
+                <input type="submit" hidden="">
+            </form>
+            <ul id="task-list" class="list-unstyled">
+                <div class="task-template" class="checkbox" style="display: none">
+                  <label>
+                    <input type="checkbox" />
+                    <span class="content">Task content goes here...</span>
+                  </label>
+                </div>
+            </ul>
+            <ul id="completed-task-list" class="list-unstyled">
+            </ul>
+        </div>
+    </section>
+
+    <section class="infographic">
+        <div class="container">
+            <div class="info-head">
+                <p class="subhead">Its Nitty &amp; Gritty</p>
+                <h1>A Task App That Doesn't Stink</h1>
+            </div>
+            <img src="assets/illustration.svg" class="info-img", alt="Illustration">
+        </div>
+    </section>
+
+    <section class="contact" id= "contact">
+        <div class="container">
+            <div class="contact-left">
+                <h2>Contact Us</h2>
+                <form action="">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email">
+                    <label for="message">Message</label>
+                    <textarea name="message" id="message" cols="30" rows="10"></textarea>
+                    <input type="submit" class="send-message-cta" value="Send Message">
+                </form>
+            </div>
+            <div class="contact-right">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248755.7802182065!2d80.06892734607673!3d13.04782226655448!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5265ea4f7d3361%3A0x6e61a70b6863d433!2sChennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1621749137709!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="app.js"></script>
+
+</body>
+</html>
