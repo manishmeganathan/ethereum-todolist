@@ -1,5 +1,12 @@
 Dapp = {
     contracts: {},
+    loading: false,
+
+    start: () => {
+        $(window).load(() => {
+            Dapp.load()
+        })
+    },
 
     load: async () => {
         console.log("app connecting...")
@@ -28,11 +35,14 @@ Dapp = {
             // Some unexpected error.
             console.error(err);
         });
+
+        // Load the Smart Contract
+        await Dapp.load_smartcontract()
+
         //
         ethereum.on('accountsChanged', Dapp.handle_accountchange);
 
-        // Load the Smart Contract
-        return Dapp.load_smartcontract();
+        return
     },
 
     handle_accountchange: function (accounts) {
@@ -43,6 +53,9 @@ Dapp = {
             Dapp.account = accounts[0];
             console.log("account has changed - ", Dapp.account);
         }
+        
+        //Dapp.set_loading(false)
+        //return Dapp.render()
     },
 
     load_smartcontract: async () => {
@@ -55,17 +68,77 @@ Dapp = {
 
         // Hydrate the smart contract with values from the blockchain
         Dapp.todolist = await Dapp.contracts.todolist.deployed();
+
+        console.log("loaded", Dapp.todolist)
+    },
+
+    set_loading: (boolean) => {
+        Dapp.loading = boolean;
+
+        const loader = document.getElementById("loader");
+        const content = document.getElementById("content");
+
+        if (boolean) {
+            loader.style.display = "block";
+            content.style.display = "none";
+        } else {
+            loader.style.display = "none";
+            content.style.display = "block";
+        }
     },
 
     render: async () => {
-        $('#account').html(Dapp.account);
-        console.log(Dapp.account);
-        console.log("render called");
-    }
-}
+        if (Dapp.loading) {
+            return
+        }
 
-$(() => {
-    $(window).load(() => {
-      Dapp.load()
-    })
-})
+        // Update app loading state
+        Dapp.set_loading(true)
+
+        // Render the account details
+        document.getElementById("account").innerHTML = Dapp.account;
+        await Dapp.render_tasks()
+
+        // Update loading state
+        Dapp.set_loading(false)
+
+        console.log("render called");
+    },
+
+    render_tasks: async () => {
+        const taskcount = await Dapp.todolist.taskcount()
+        const $tasktemplate = document.getElementsByClassName("task-template")[0];
+
+        console.log($tasktemplate)
+
+        for (var i = 1; i <= taskcount; i++) {
+            const task = await Dapp.todolist.tasks(i)
+            const taskid = task[0].toNumber()
+            const taskcontent = task[1]
+            const taskcompleted = task[2]
+
+            const $newtasktemplate = $tasktemplate.cloneNode(true);
+            //console.log("newtemplate", )
+
+            $newtasktemplate.querySelector(".content").innerHTML= taskcontent;
+
+            //$newtasktemplate.find('.content').innerHTML(taskcontent)
+            // $newtasktemplate.find('input')
+            //                 .prop('name', taskid)
+            //                 .prop('checked', taskcompleted)
+            //                 .on('click', Dapp.toggle_completed)
+
+            if (taskcompleted) {
+                document.getElementById("completed-task-list").append($newtasktemplate)
+            } else {
+                document.getElementById("task-list").append($newtasktemplate)
+            }
+
+            $newtasktemplate.style.display = "inline-flex";
+        }
+    },
+
+
+
+    
+}
