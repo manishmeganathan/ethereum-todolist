@@ -71,6 +71,12 @@ section {
   display: block;
 }
 
+.task-section .task-content .task-list .task-template label {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
 .task-section input {
   font-family: 'Poppins';
   text-align: center;
@@ -220,6 +226,36 @@ nav li a:hover {
   }
   .navbar nav li.current a {
     font-weight: bold;
+  }
+}
+
+@media only screen and (min-width: 1080px) {
+  .container {
+    width: 1080px;
+    margin: 0 auto;
+  }
+  section {
+    padding: 10em 4em;
+  }
+  .infographic .container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    text-align: left;
+  }
+  .infographic .container .info-head {
+    margin: 3em 3em 0 5em;
+  }
+  .infographic .container .info-head h1 {
+    font-size: 3em;
+    width: 90%;
+  }
+  .info-img {
+    width: 30%;
+    margin-right: 8em;
   }
 }
 /*# sourceMappingURL=main.css.map */
