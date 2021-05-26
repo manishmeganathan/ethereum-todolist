@@ -21,7 +21,7 @@ body {
 }
 
 section {
-  padding: 5em 2em;
+  padding: 3em 2em;
 }
 
 .navbar {
@@ -57,6 +57,8 @@ section {
 
 .task-section {
   text-align: center;
+  padding: 0;
+  margin-bottom: 5em;
 }
 
 .task-section .text-center {
@@ -67,33 +69,36 @@ section {
   font-weight: bold;
 }
 
-.task-section .task-content {
-  display: block;
+.task-section .task-content h1 {
+  margin-top: 2em;
+  color: var(--primary-color);
 }
 
-.task-section .task-content .task-list .task-template label {
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
+.task-section .task-content .task-template {
+  text-align: left;
+  width: 70%;
+  margin: 0 auto;
+  font-size: 1em;
+  word-wrap: break-word;
 }
 
-.task-section input {
+.task-section .task-content .task-template .content {
+  padding: 1em;
+}
+
+.task-section .task-content .list-complete {
+  margin-top: 1em;
+  color: grey;
+  text-decoration: line-through;
+}
+
+.task-section .newtask-form input {
   font-family: 'Poppins';
   text-align: center;
-}
-
-.info-head .subhead {
-  text-transform: uppercase;
-  font-weight: bold;
-  color: black;
-  letter-spacing: 0.5em;
-}
-
-.info-head h1 {
-  font-size: 3em;
-  line-height: 1.3em;
-  margin-top: .2em;
-  color: white;
+  border-radius: 5em;
+  width: 70%;
+  margin-bottom: 2em;
+  margin-top: 1em;
 }
 
 .infographic {
@@ -101,7 +106,21 @@ section {
   background: var(--primary-color);
 }
 
-.info-img {
+.infographic .info-head .subhead {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: black;
+  letter-spacing: 0.5em;
+}
+
+.infographic .info-head h1 {
+  font-size: 3em;
+  line-height: 1.3em;
+  margin-top: .2em;
+  color: white;
+}
+
+.infographic .info-img {
   width: 70%;
   margin-top: 3em;
 }
@@ -131,13 +150,7 @@ section {
   border-radius: 2em;
 }
 
-label {
-  display: block;
-  font-size: 1.2em;
-  margin-bottom: .5em;
-}
-
-input, textarea {
+.contact input, .contact textarea {
   width: 100%;
   padding: 0.8em;
   margin-bottom: 1em;
@@ -147,8 +160,10 @@ input, textarea {
           box-sizing: border-box;
 }
 
-nav.menu-btn {
+.contact label {
   display: block;
+  font-size: 1.2em;
+  margin-bottom: .5em;
 }
 
 nav {
@@ -166,6 +181,16 @@ nav ul.primary-nav {
   margin-top: 5em;
 }
 
+nav .menu-btn {
+  display: block;
+}
+
+nav .mobile-menu-exit {
+  float: right;
+  margin: .5em;
+  cursor: pointer;
+}
+
 nav li a {
   color: white;
   text-decoration: none;
@@ -179,24 +204,50 @@ nav li a:hover {
   font-weight: bold;
 }
 
-.mobile-menu-exit {
-  float: right;
-  margin: .5em;
-  cursor: pointer;
+.footbar {
+  background: var(--primary-color);
+  height: 6em;
+  text-align: center;
 }
 
-@media only screen and (min-width: 768px) {
+.footbar footer {
+  color: white;
+  margin-top: 3em;
+}
+
+.footbar footer a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.footbar footer .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  place-content: space-between;
+}
+
+.footbar footer .preface {
+  padding-top: 1em;
+  font-size: 0.75em;
+  font-style: italic;
+}
+
+.footbar footer .name {
+  margin-top: 0;
+  font-size: 1.5em;
+}
+
+@media only screen and (min-width: 500px) {
+  .task-section .task-content .task-template {
+    font-size: 1.25em;
+  }
+}
+
+@media only screen and (min-width: 900px) {
   .mobile-menu, .mobile-menu-exit {
     display: none;
-  }
-  .navbar .container {
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-columns: 180px auto;
-        grid-template-columns: 180px auto;
-    -webkit-box-pack: unset;
-        -ms-flex-pack: unset;
-            justify-content: unset;
   }
   .navbar nav {
     display: -webkit-box;
@@ -210,6 +261,15 @@ nav li a:hover {
     height: auto;
     width: 100%;
     padding: 0;
+  }
+  .navbar nav .container {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 180px auto;
+        grid-template-columns: 180px auto;
+    -webkit-box-pack: unset;
+        -ms-flex-pack: unset;
+            justify-content: unset;
   }
   .navbar nav ul {
     display: -webkit-box;
@@ -227,6 +287,13 @@ nav li a:hover {
   .navbar nav li.current a {
     font-weight: bold;
   }
+  .task-section .newtask-form input {
+    width: 50%;
+  }
+  .task-section .task-content .task-template {
+    width: 50%;
+    font-size: 1.5em;
+  }
 }
 
 @media only screen and (min-width: 1080px) {
@@ -235,7 +302,7 @@ nav li a:hover {
     margin: 0 auto;
   }
   section {
-    padding: 10em 4em;
+    padding: 8em 4em;
   }
   .infographic .container {
     display: -webkit-box;
@@ -253,9 +320,28 @@ nav li a:hover {
     font-size: 3em;
     width: 90%;
   }
-  .info-img {
+  .infographic .container .info-img {
     width: 30%;
     margin-right: 8em;
+  }
+  .contact {
+    position: relative;
+  }
+  .contact .container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .contact-right {
+    position: absolute;
+    right: 0;
+    top: 7em;
+    width: 45%;
+    height: 100%;
+  }
+  .contact-right iframe {
+    height: 70%;
+    width: 80%;
   }
 }
 /*# sourceMappingURL=main.css.map */
