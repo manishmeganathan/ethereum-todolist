@@ -16,13 +16,12 @@
                 <img id="mobile-exit" class="mobile-menu-exit" src="assets/exit.svg" alt="Exit Navigation Menu">
                 <ul class="primary-nav">
                     <li class="current"><a href="#">Home</a></li>
-                    <li><a href="http://www.github.com/manishmeganathan">Github</a></li>
-                    <li ><a href="#contact-section">Contact</a></li>
+                    <li><a href="http://www.github.com/manishmeganathan/ethereum-todolist-web">Github</a></li>
+                    <li ><a href="#contact">Contact</a></li>
                 </ul>
                 <ul>
                     <li class="account"><a href="#"><span id="account">No Account Connected</span></a></li>
                 </ul>
-
             </nav>
         </div>
     </div>
@@ -33,13 +32,13 @@
                 <p class="text-center">Loading...</p>
             </div>
         </div>
-
         <div class="task-content" id="content">
-            <form onSubmit="App.createTask(); return false;">
+            <h1>Task List</h1>
+            <form class="newtask-form" onSubmit="Dapp.create_task(); return false;">
                 <input id="newtask" type="text" class="form-control" placeholder="Add task..." required>
                 <input type="submit" hidden="">
             </form>
-            <ul id="task-list" class="list-unstyled">
+            <ul id="task-list" class="list-incomplete">
                 <div class="task-template" class="checkbox" style="display: none">
                   <label>
                     <input type="checkbox" />
@@ -47,7 +46,7 @@
                   </label>
                 </div>
             </ul>
-            <ul id="completed-task-list" class="list-unstyled">
+            <ul id="completed-task-list" class="list-complete">
             </ul>
         </div>
     </section>
@@ -56,17 +55,20 @@
         <div class="container">
             <div class="info-head">
                 <p class="subhead">Its Nitty &amp; Gritty</p>
-                <h1>A Task App That Doesn't Stink</h1>
+                <h1>A Task List powered by the Ethereum Blockchain</h1>
             </div>
             <img src="assets/illustration.svg" class="info-img", alt="Illustration">
         </div>
     </section>
 
+
+
     <section class="contact" id= "contact">
         <div class="container">
+
             <div class="contact-left">
                 <h2>Contact Us</h2>
-                <form action="">
+                <form action="Dapp.submit_form()">
                     <label for="name">Name</label>
                     <input type="text" id="name" name="name">
                     <label for="email">Email</label>
@@ -82,12 +84,36 @@
         </div>
     </section>
 
+    <div class="footbar">
+        <div class="container">
+            <footer>
+                <p class="preface">designed and developed by</p>
+                <p class="name"><a href="http://www.github.com/manishmeganathan">Manish Meganathan</a></p>
+            </footer>
+        </div>
+    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="vendor/@truffle/contract/dist/truffle-contract.min.js"></script>
     <script src="vendor/@metamask/detect-provider/dist/detect-provider.min.js"></script>
     <script src="vendor/web3/dist/web3.min.js"></script>
     <script src="app.js"></script>
-    <script>Dapp.start()</script>
+    <script>
+
+    const mobilebtn = document.getElementById('mobile-cta');
+    const nav = document.querySelector('nav')
+    const mobilebtnexit = document.getElementById('mobile-exit');
+
+    mobilebtn.addEventListener('click', () => {
+        nav.classList.add('menu-btn');
+    })
+
+    mobilebtnexit.addEventListener('click', () => {
+        nav.classList.remove('menu-btn');
+    })
+
+    Dapp.start()
+    </script>
 </body>
 </html>
