@@ -31,7 +31,7 @@ Dapp = {
         }
         
         //
-        ethereum.request({ method: 'eth_accounts' }).then(Dapp.handle_accountchange).catch((err) => {
+        ethereum.request({ method: 'eth_accounts' }).then(Dapp.set_account).catch((err) => {
             // Some unexpected error.
             console.error(err);
         });
@@ -45,17 +45,20 @@ Dapp = {
         return
     },
 
-    handle_accountchange: function (accounts) {
+    set_account: function (accounts) {
         if (accounts.length === 0) {
             // MetaMask is locked or the user has not connected any accounts
             console.log('Please connect to MetaMask.');
         } else if (accounts[0] !== Dapp.account) {
             Dapp.account = accounts[0];
-            console.log("account has changed - ", Dapp.account);
+            console.log("account has been set - ", Dapp.account);
         }
-        
-        //Dapp.set_loading(false)
-        //return Dapp.render()
+    },
+
+    handle_accountchange: function (accounts) {        
+        set_account(accounts)
+        Dapp.set_loading(false)
+        return Dapp.render()
     },
 
     load_smartcontract: async () => {
@@ -86,6 +89,14 @@ Dapp = {
             content.style.display = "block";
         }
     },
+
+    toggle_completed: async (e) => {
+        //console.log("task toggled", e.target.name)
+        Dapp.set_loading(true)
+        const taskid = e.target.name
+        await Dapp.todolist.toggleCompleted(taskid, {from: Dapp.account})
+        window.location.reload()
+      },
 
     render: async () => {
         if (Dapp.loading) {
@@ -118,27 +129,26 @@ Dapp = {
             const taskcompleted = task[2]
 
             const $newtasktemplate = $tasktemplate.cloneNode(true);
-            //console.log("newtemplate", )
-
             $newtasktemplate.querySelector(".content").innerHTML= taskcontent;
-
-            //$newtasktemplate.find('.content').innerHTML(taskcontent)
-            // $newtasktemplate.find('input')
-            //                 .prop('name', taskid)
-            //                 .prop('checked', taskcompleted)
-            //                 .on('click', Dapp.toggle_completed)
-
+            $newtasktemplate.querySelector("input").name = taskid;
+            $newtasktemplate.querySelector("input").checked = taskcompleted;
+            $newtasktemplate.addEventListener('click', Dapp.toggle_completed)
+                            
             if (taskcompleted) {
                 document.getElementById("completed-task-list").append($newtasktemplate)
             } else {
                 document.getElementById("task-list").append($newtasktemplate)
             }
 
-            $newtasktemplate.style.display = "inline-flex";
+            $newtasktemplate.style.display = "block";
         }
     },
 
+    create_task: async () => {
+        Dapp.set_loading(true)
+        const content = document.querySelector('#newtask').value;
 
-
-    
+        await Dapp.todolist.createTask(content, {from: Dapp.account})
+        window.location.reload()
+    },
 }
