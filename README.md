@@ -1,4 +1,4 @@
-# ethereum-todolist-web
+# ethereum-todolist
 ## A distributed application for a simple to-do list powered by Ethereum Smart Contracts and Solidity. Web application built with HTML, CSS and Javascript
 
 ### **Contributors**
