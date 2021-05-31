@@ -1,5 +1,5 @@
 {
-  "name": "ethereum-todolist-web",
+  "name": "ethereum-todolist",
   "version": "1.0.0",
   "description": "A distributed web application for a simple to-do list powered by Ethereum Smart Contracts",
   "main": "truffle-config.js",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/manishmeganathan/ethereum-todolist-web.git"
+    "url": "git+https://github.com/manishmeganathan/ethereum-todolist.git"
   },
   "keywords": [
     "ethereum",
@@ -24,9 +24,9 @@
   "author": "Manish Meganathan <meganathan.manish@gmail.com> (http://github.com/manishmeganathan)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/manishmeganathan/ethereum-todolist-web/issues"
+    "url": "https://github.com/manishmeganathan/ethereum-todolist/issues"
   },
-  "homepage": "https://github.com/manishmeganathan/ethereum-todolist-web#readme",
+  "homepage": "https://github.com/manishmeganathan/ethereum-todolist#readme",
   "dependencies": {
     "@ethereumjs/common": "^2.2.0",
     "@metamask/detect-provider": "^1.2.0",
